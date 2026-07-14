@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12 d-flex justify-content-between align-items-center">
+        <div>
+            <h2 class="fw-bold">Manage Applications</h2>
+            <p class="text-muted">Review and approve volunteer requests.</p>
+        </div>
+        <a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-secondary rounded-pill px-4">Back to Dashboard</a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="glass-card p-0 overflow-hidden">
+            <table class="table table-hover mb-0 custom-table">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Volunteer</th>
+                        <th>Project</th>
+                        <th>Applied On</th>
+                        <th>Status</th>
+                        <th class="pe-4 text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if applications %}
+                        {% for app in applications %}
+                        <tr>
+                            <td class="ps-4 fw-bold align-middle">{{ app.volunteer_name }}</td>
+                            <td class="align-middle text-primary fw-medium">{{ app.project_title }}</td>
+                            <td class="align-middle text-muted small">{{ app.applied_at.strftime('%b %d, %Y') }}</td>
+                            <td class="align-middle">
+                                {% if app.status == 'pending' %}
+                                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Pending</span>
+                                {% elif app.status == 'approved' %}
+                                    <span class="badge bg-success px-3 py-2 rounded-pill">Approved</span>
+                                {% else %}
+                                    <span class="badge bg-danger px-3 py-2 rounded-pill">Rejected</span>
+                                {% endif %}
+                            </td>
+                            <td class="pe-4 text-end align-middle">
+                                {% if app.status == 'pending' %}
+                                <div class="d-flex justify-content-end gap-2">
+                                    <form action="{{ url_for('admin.update_application', app_id=app.id, action='approve') }}" method="POST">
+                                        <button type="submit" class="btn btn-sm btn-success rounded-circle" title="Approve"><i class="bi bi-check-lg"></i></button>
+                                    </form>
+                                    <form action="{{ url_for('admin.update_application', app_id=app.id, action='reject') }}" method="POST">
+                                        <button type="submit" class="btn btn-sm btn-danger rounded-circle" title="Reject"><i class="bi bi-x-lg"></i></button>
+                                    </form>
+                                </div>
+                                {% else %}
+                                    <span class="text-muted small">Processed</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center py-5 text-muted">
+                                No applications found.
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

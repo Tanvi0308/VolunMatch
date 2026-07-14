@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 class="fw-bold">Welcome, {{ session.get('user_name') }}!</h2>
+        <p class="text-muted">Here are the best projects matching your skills, hand-picked by our AI.</p>
+    </div>
+</div>
+
+<div class="row g-4">
+    {% if projects %}
+        {% for project in projects %}
+        <div class="col-md-6 col-lg-4">
+            <div class="glass-card h-100 p-4 d-flex flex-column position-relative overflow-hidden project-card">
+                <!-- Match Badge -->
+                <div class="position-absolute top-0 end-0 m-3 px-3 py-1 rounded-pill bg-success text-white fw-bold small shadow-sm z-1">
+                    <i class="bi bi-robot me-1"></i> {{ project.match_score }}% Match
+                </div>
+                
+                <h4 class="fw-bold mt-2 mb-3 pe-5">{{ project.title }}</h4>
+                <p class="text-muted small flex-grow-1">{{ project.description }}</p>
+                
+                <div class="mb-4">
+                    <h6 class="fw-bold small text-uppercase text-muted">Required Skills</h6>
+                    <div class="d-flex flex-wrap gap-1">
+                        {% if project.skills %}
+                            {% for skill in project.skills.split(',') %}
+                                <span class="badge bg-light text-dark border">{{ skill.strip() }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <span class="text-muted small">None specified</span>
+                        {% endif %}
+                    </div>
+                </div>
+                
+                <form action="{{ url_for('volunteer.apply', project_id=project.id) }}" method="POST">
+                    <button type="submit" class="btn btn-primary w-100 rounded-pill fw-bold project-btn">Apply Now</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="col-12">
+            <div class="glass-card p-5 text-center">
+                <i class="bi bi-emoji-frown display-4 text-muted mb-3"></i>
+                <h4>No Recommendations Yet</h4>
+                <p class="text-muted">We couldn't find any projects matching your exact skills right now. Please check back later or update your profile.</p>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

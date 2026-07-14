@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-5">
+        <div class="glass-card p-5">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Welcome Back</h2>
+                <p class="text-muted">Login to view your AI recommendations.</p>
+            </div>
+            <form method="POST" action="{{ url_for('auth.login') }}">
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold text-uppercase">Email address</label>
+                    <input type="email" class="form-control custom-input" name="email" required placeholder="name@example.com">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-muted small fw-bold text-uppercase">Password</label>
+                    <input type="password" class="form-control custom-input" name="password" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold">Login</button>
+            </form>
+            <div class="text-center mt-4">
+                <p class="text-muted small">Don't have an account? <a href="{{ url_for('auth.register') }}" class="text-primary text-decoration-none fw-bold">Register</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

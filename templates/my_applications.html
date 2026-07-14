@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <h2 class="fw-bold">My Applications</h2>
+        <p class="text-muted">Track the status of projects you've applied to.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="glass-card p-0 overflow-hidden">
+            <table class="table table-hover mb-0 custom-table">
+                <thead class="table-light">
+                    <tr>
+                        <th class="ps-4">Project Title</th>
+                        <th>Applied On</th>
+                        <th>Status</th>
+                        <th class="pe-4 text-end">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if applications %}
+                        {% for app in applications %}
+                        <tr>
+                            <td class="ps-4 fw-bold align-middle">{{ app.title }}</td>
+                            <td class="align-middle text-muted small">{{ app.applied_at.strftime('%b %d, %Y') }}</td>
+                            <td class="align-middle">
+                                {% if app.status == 'pending' %}
+                                    <span class="badge bg-warning text-dark px-3 py-2 rounded-pill">Pending</span>
+                                {% elif app.status == 'approved' %}
+                                    <span class="badge bg-success px-3 py-2 rounded-pill">Approved</span>
+                                {% else %}
+                                    <span class="badge bg-danger px-3 py-2 rounded-pill">Rejected</span>
+                                {% endif %}
+                            </td>
+                            <td class="pe-4 text-end align-middle">
+                                <button type="button" class="btn btn-sm btn-outline-secondary rounded-circle" data-bs-toggle="popover" title="{{ app.title }}" data-bs-content="{{ app.description }}"><i class="bi bi-info-circle"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="4" class="text-center py-5 text-muted">
+                                You haven't applied to any projects yet. <a href="{{ url_for('volunteer.dashboard') }}" class="text-primary fw-bold">Find Projects</a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Initialize popovers
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+      return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
+{% endblock %}

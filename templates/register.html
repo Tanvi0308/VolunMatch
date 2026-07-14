@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row justify-content-center mt-5">
+    <div class="col-md-6">
+        <div class="glass-card p-5">
+            <div class="text-center mb-4">
+                <h2 class="fw-bold">Join VolunMatch</h2>
+                <p class="text-muted">Create an account to find your perfect project.</p>
+            </div>
+            <form method="POST" action="{{ url_for('auth.register') }}">
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold text-uppercase">Full Name</label>
+                    <input type="text" class="form-control custom-input" name="name" required placeholder="John Doe">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold text-uppercase">Email address</label>
+                    <input type="email" class="form-control custom-input" name="email" required placeholder="john@example.com">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label text-muted small fw-bold text-uppercase">Password</label>
+                    <input type="password" class="form-control custom-input" name="password" required placeholder="••••••••">
+                </div>
+                <div class="mb-4">
+                    <label class="form-label text-muted small fw-bold text-uppercase mb-3 d-block">Your Skills <span class="fw-normal text-lowercase">(Select all that apply)</span></label>
+                    <div class="row g-2">
+                        {% for skill in skills %}
+                        <div class="col-6 col-md-4">
+                            <div class="form-check custom-checkbox-card">
+                                <input class="form-check-input d-none" type="checkbox" name="skills" value="{{ skill.id }}" id="skill_{{ skill.id }}">
+                                <label class="form-check-label w-100 text-center" for="skill_{{ skill.id }}">
+                                    {{ skill.name }}
+                                </label>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 rounded-pill py-2 fw-bold">Register</button>
+            </form>
+            <div class="text-center mt-4">
+                <p class="text-muted small">Already have an account? <a href="{{ url_for('auth.login') }}" class="text-primary text-decoration-none fw-bold">Login</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

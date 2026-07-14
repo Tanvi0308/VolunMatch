@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row align-items-center min-vh-75">
+    <div class="col-lg-6 hero-text pe-lg-5">
+        <h1 class="display-3 fw-bolder mb-4 text-gradient">AI-Powered Volunteer Matching</h1>
+        <p class="lead mb-5 text-muted">
+            Find the perfect social projects that match your skills. Our recommendation engine uses Machine Learning to ensure your time and talents make the biggest impact.
+        </p>
+        <div class="d-flex gap-3">
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-lg rounded-pill px-5 shadow-lg hero-btn">Get Started</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-outline-secondary btn-lg rounded-pill px-5 hero-btn-outline">Login</a>
+        </div>
+        
+        <div class="mt-5 d-flex gap-4 stats-row">
+            <div>
+                <h3 class="fw-bold mb-0">AI</h3>
+                <small class="text-muted">TF-IDF Matching</small>
+            </div>
+            <div>
+                <h3 class="fw-bold mb-0">NLP</h3>
+                <small class="text-muted">Skill Extraction</small>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 mt-5 mt-lg-0">
+        <div class="hero-image-container position-relative">
+            <div class="blob-shape primary-blob"></div>
+            <div class="blob-shape secondary-blob"></div>
+            <div class="glass-card p-5 hero-card z-1 position-relative">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="icon-box bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width:50px; height:50px;">
+                        <i class="bi bi-star-fill"></i>
+                    </div>
+                    <div>
+                        <h5 class="mb-0 fw-bold">Top Match Found!</h5>
+                        <small class="text-success">98% Similarity</small>
+                    </div>
+                </div>
+                <h4>Community Garden Setup</h4>
+                <p class="text-muted small mb-4">Requires: Event Planning, Social Media</p>
+                <button class="btn btn-primary w-100 rounded-pill">Apply Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

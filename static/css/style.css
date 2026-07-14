@@ -1,0 +1,180 @@
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #4338ca;
+    --secondary: #ec4899;
+    --dark: #0f172a;
+    --light: #f8fafc;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f1f5f9;
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Glassmorphism Utilities */
+.glass-nav {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.glass-nav .navbar-brand {
+    color: var(--primary) !important;
+}
+
+.glass-nav .nav-link {
+    color: var(--dark) !important;
+    font-weight: 500;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Gradients */
+.text-gradient {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border: none;
+    box-shadow: 0 4px 14px 0 rgba(79, 70, 229, 0.39);
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.23);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+/* Custom Inputs */
+.custom-input {
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+.custom-input:focus {
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+    border-color: var(--primary);
+}
+
+/* Custom Checkbox for Skills */
+.custom-checkbox-card {
+    position: relative;
+}
+
+.custom-checkbox-card label {
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.custom-checkbox-card input:checked + label {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 6px -1px rgba(79, 70, 229, 0.3);
+}
+
+/* Hero Section */
+.hero-btn {
+    padding: 15px 40px;
+    font-weight: 600;
+}
+.hero-btn-outline {
+    padding: 15px 40px;
+    font-weight: 600;
+    border-color: #cbd5e1;
+    color: var(--dark);
+}
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+/* Abstract Background Blobs */
+.blob-shape {
+    position: absolute;
+    filter: blur(80px);
+    z-index: 0;
+    border-radius: 50%;
+    opacity: 0.6;
+}
+
+.primary-blob {
+    top: -10%;
+    right: -10%;
+    width: 400px;
+    height: 400px;
+    background: var(--primary);
+    animation: float 10s ease-in-out infinite;
+}
+
+.secondary-blob {
+    bottom: -10%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: var(--secondary);
+    animation: float 8s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) rotate(0deg); }
+    33% { transform: translate(30px, -50px) rotate(10deg); }
+    66% { transform: translate(-20px, 20px) rotate(-10deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+/* Table Styling */
+.custom-table {
+    --bs-table-bg: transparent;
+}
+.custom-table th {
+    border-bottom: 2px solid #e2e8f0;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    padding: 1rem;
+}
+.custom-table td {
+    border-bottom: 1px solid #f1f5f9;
+    padding: 1rem;
+}
